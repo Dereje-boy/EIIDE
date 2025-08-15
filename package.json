@@ -4,16 +4,21 @@
   "description": "\"This project is final year project of IT in AUWC\"",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Dereje-boy/EIIDE.git"
+    "type": "git"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Dereje-boy/EIIDE/issues"
-  },
-  "homepage": "https://github.com/Dereje-boy/EIIDE#readme"
+  "bugs": {},
+  "homepage": "https://github.com/Dereje-boy/EIIDE#readme",
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.3",
+    "multer": "^2.0.2",
+    "mysql2": "^3.14.3",
+    "nodemon": "^3.1.10"
+  }
 }
