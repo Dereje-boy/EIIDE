@@ -14,9 +14,11 @@
   "bugs": {},
   "homepage": "https://github.com/Dereje-boy/EIIDE#readme",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "cookie-parser": "~1.4.4",
     "express": "^5.1.0",
     "express-handlebars": "^8.0.3",
+    "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",
     "mysql2": "^3.14.3",
     "nodemon": "^3.1.10"

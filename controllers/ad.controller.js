@@ -3,6 +3,7 @@ const adModel = require('../models/adModel');
 // @desc    Create new advertisement
 // @route   POST /api/ads
 exports.createAd = async (req, res) => {
+    console.log('inserting new ad')
     try {
         const { image } = req.body;
         const adId = await adModel.createAdvertisement(image);

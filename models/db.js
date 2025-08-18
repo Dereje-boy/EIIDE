@@ -1,3 +1,9 @@
+// config/db.js
+// require('dotenv').config({ 
+//   path: process.env.NODE_ENV === 'production' 
+//     ? '.env.production' 
+//     : '.env'
+// });
 const mysql = require('mysql2');
 
 const pool = mysql.createPool({

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EIIDE - Woliso Branch</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ecf0f1;
+        }
+
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #3498db;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content Layout */
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .content {
+            flex: 1;
+            min-width: 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar {
+            width: 300px;
+            padding: 1rem;
+        }
+
+        /* Ads Section */
+        .ad-container {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .ad-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 1rem;
+            padding: 0 1rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #3498db;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid #34495e;
+            margin-top: 1rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .ad-container {
+                width: 48%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #2c3e50;
+                padding: 1rem;
+                display: none;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .sidebar {
+                flex-direction: column;
+            }
+
+            .ad-container {
+                width: 100%;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #3498db;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Product Grid */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            height: 200px;
+            background-color: #eee;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-info {
+            padding: 1rem;
+        }
+
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info p {
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+
+        .product-info .price {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">EIIDE</div>
+            <button class="mobile-menu-btn">☰</button>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/newproduct">Products</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="/newproduct">New Products</a></li>
+                    <li><a href="#login">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Welcome to EIIDE</h1>
+            <p>The Place where you get what products you want with remote purchase and affordable price</p>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <div class="container main-content">
+        <!-- Primary Content -->
+        <div class="content">
+            <h2>Available Products</h2>
+            <div class="products">
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200')">
+                    </div>
+                    <div class="product-info">
+                        <h3>Product One</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="price">$99.99</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200')">
+                    </div>
+                    <div class="product-info">
+                        <h3>Product Two</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="price">$129.99</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200')">
+                    </div>
+                    <div class="product-info">
+                        <h3>Product Three</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="price">$79.99</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200')">
+                    </div>
+                    <div class="product-info">
+                        <h3>Product Four</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="price">$149.99</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar with Ads -->
+        <div class="sidebar">
+            <div class="ad-container">
+                <img src="https://via.placeholder.com/300x250" alt="Advertisement">
+            </div>
+            <div class="ad-container">
+                <img src="https://via.placeholder.com/300x250" alt="Advertisement">
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About EIIDE</h3>
+                    <p>
+                        Ethiopian Industrial Input Development Enterprise (EIIDE) formed in 2015 under the proclamation
+                        number 328/006/ by
+                        replacing Merchandise wholesale and Import Trade Enterprise (MEWIT) was established in 1993 by
+                        the merger of the former
+                        trading corporations.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#new">New Arrivals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>Email: info@brootech.com</li>
+                        <li>Phone: +251 118 58 57 79</li>
+                        <li>Woliso</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 EIIDE. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
+            document.getElementById('main-nav').classList.toggle('active');
+        });
+
+        // Responsive Ad Placement
+        function handleResponsiveAds() {
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+            const adContainers = document.querySelectorAll('.ad-container');
+
+            if (window.innerWidth <= 992) {
+                // For tablet and mobile - move ads below content
+                if (!sidebar.contains(adContainers[0])) {
+                    mainContent.appendChild(sidebar);
+                }
+            } else {
+                // For desktop - keep ads on the right
+                if (sidebar.contains(adContainers[0])) {
+                    const container = document.querySelector('.container.main-content');
+                    container.insertBefore(sidebar, container.children[1]);
+                }
+            }
+        }
+
+        // Initialize and handle resize
+        window.addEventListener('load', handleResponsiveAds);
+        window.addEventListener('resize', handleResponsiveAds);
+    </script>
+</body>
+
+</html>

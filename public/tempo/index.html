@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-users-cog"></i> Account Management</h1>
+            <div class="admin-controls">
+                <button id="showCreateFormBtn"><i class="fas fa-user-plus"></i> Create Account</button>
+            </div>
+        </header>
+
+        <!-- Create Account Form (Initially hidden) -->
+        <div id="createAccountForm" class="form-container" style="display: none;">
+            <h2>Register New Account</h2>
+            <form id="accountForm">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" required>
+                    <small class="form-text">Must be unique</small>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="account_type">Account Type:</label>
+                    <select id="account_type" required>
+                        <option value="">Select type</option>
+                        <option value="customer">Customer</option>
+                        <option value="employee">Employee</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Register</button>
+                <button type="button" id="cancelCreateBtn" class="btn-secondary">Cancel</button>
+            </form>
+        </div>
+
+        <!-- Account List Table -->
+        <div class="table-container">
+            <h2>Account List</h2>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search accounts...">
+                <button id="refreshBtn"><i class="fas fa-sync-alt"></i> Refresh</button>
+            </div>
+            <table id="accountTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="accountTableBody">
+                    <!-- Accounts will be loaded here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Account Detail Modal (Hidden by default) -->
+        <div id="accountDetailModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2 id="modalTitle">Account Details</h2>
+                <div id="accountDetailContent">
+                    <!-- Details will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Update Account Type Modal -->
+        <div id="updateTypeModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Update Account Type</h2>
+                <form id="updateTypeForm">
+                    <input type="hidden" id="updateAccountId">
+                    <div class="form-group">
+                        <label for="new_account_type">New Account Type:</label>
+                        <select id="new_account_type" required>
+                            <option value="customer">Customer</option>
+                            <option value="employee">Employee</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

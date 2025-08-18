@@ -1,0 +1,64 @@
+<!-- Hero Section -->
+<section class="hero" id="home">
+    <div class="container">
+        <h1>Welcome to EIIDE</h1>
+        <p>The Place where you get what products you want with remote purchase and affordable price</p>
+    </div>
+</section>
+
+<!-- Main Content Area -->
+<div class="container main-content">
+    <!-- Primary Content -->
+    <div class="content">
+        <h2 id="available-products">Available Products</h2>
+        <div id="products-container">
+            <div class="loading">Loading products...</div>
+        </div>
+    </div>
+
+    <!-- Sidebar with Ads -->
+    <div class="sidebar">
+        <div class="ad-container">
+            <img src="uploads/products/ad-one.jpg" alt="Advertisement">
+        </div>
+    </div>
+</div>
+
+<!-- Order Confirmation Dialog -->
+<div class="order-dialog-overlay" id="orderDialogOverlay"></div>
+<div class="order-dialog" id="orderDialog">
+    <h3>Confirm Your Order</h3>
+
+    <div class="order-details">
+        <div class="order-detail">
+            <span class="order-detail-label">Product ID:</span>
+            <span id="dialogProId">-</span>
+        </div>
+        <div class="order-detail">
+            <span class="order-detail-label">Unit Price:</span>
+            <span id="dialogPrice">$0.00</span>
+        </div>
+        <div class="order-detail">
+            <span class="order-detail-label">Quantity:</span>
+            <span id="dialogQuantity">1</span>
+        </div>
+        <div class="order-detail">
+            <span class="order-detail-label">Total Price:</span>
+            <span id="dialogTotalPrice">$0.00</span>
+        </div>
+    </div>
+
+    <div class="receipt-upload">
+        <label for="receiptImage">Upload Payment Receipt :</label>
+        <input type="file" id="receiptImage" accept="image/*">
+        <img id="receiptPreview" class="receipt-preview" alt="Receipt preview">
+    </div>
+    <div id="orderResponse" class="order-response"></div>
+    <div class="dialog-actions">
+        <button class="btn btn-cancel" id="cancelOrderBtn">Cancel</button>
+        <button class="btn btn-submit" id="submitOrderBtn">
+            Confirm Order
+            <span class="loading-spinner" id="submitSpinner"></span>
+        </button>
+    </div>
+</div>
