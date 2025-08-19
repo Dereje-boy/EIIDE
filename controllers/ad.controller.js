@@ -5,7 +5,7 @@ const adModel = require('../models/adModel');
 exports.createAd = async (req, res) => {
     console.log('inserting new ad')
     try {
-        const { image } = req.body;
+        const image = `/uploads/ads/${req.file.filename}`;
         const adId = await adModel.createAdvertisement(image);
 
         res.json({
@@ -15,6 +15,7 @@ exports.createAd = async (req, res) => {
             data: { ad_id: adId }
         });
     } catch (error) {
+        console.log(error)
         res.json({
             success: false,
             message: 'Try compressing your image file below 2MB or using PNG/JPG format',
@@ -22,6 +23,10 @@ exports.createAd = async (req, res) => {
         });
     }
 };
+
+exports.showCreateAdForm = async (req, res) => {
+    res.render('ad/ad.handlebars')
+}
 
 // @desc    Get all advertisements
 // @route   GET /api/ads

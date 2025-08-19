@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EIIDE - Admin Dashboard</title>
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Admin Header */
+        .admin-header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ecf0f1;
+        }
+
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #3498db;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Admin Layout */
+        .admin-container {
+            display: flex;
+            min-height: calc(100vh - 60px);
+        }
+
+        .admin-sidebar {
+            width: 250px;
+            background-color: #34495e;
+            color: white;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 60px;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+
+        .admin-profile {
+            text-align: center;
+            padding: 0 1rem 1.5rem;
+            border-bottom: 1px solid #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-image {
+            width: 80px;
+            height: 80px;
+            background-color: #7f8c8d;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background-size: cover;
+        }
+
+        .admin-menu ul {
+            list-style: none;
+        }
+
+        .admin-menu li a {
+            display: block;
+            color: #ecf0f1;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .admin-menu li a:hover,
+        .admin-menu li a.active {
+            background-color: #2c3e50;
+            color: #3498db;
+        }
+
+        .admin-menu li a i {
+            margin-right: 0.75rem;
+            font-style: normal;
+        }
+
+        .admin-content {
+            flex: 1;
+            padding: 1.5rem;
+        }
+
+        /* Dashboard Sections */
+        .dashboard-section,
+        .management-section {
+            background: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .stat-info h3 {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-info p {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* Tables */
+        .management-table-container {
+            overflow-x: auto;
+        }
+
+        .management-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .management-table th,
+        .management-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .management-table th {
+            background-color: #f5f7fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .management-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-danger {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .admin-container {
+                flex-direction: column;
+            }
+
+            .admin-sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+            }
+
+            .admin-menu ul {
+                display: flex;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+
+            .admin-menu li {
+                flex-shrink: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #2c3e50;
+                padding: 1rem;
+                display: none;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-btns {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="container header-container">
+            <div class="logo">EIIDE ADMIN</div>
+            <button class="mobile-menu-btn">☰</button>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#dashboard" class="active">Dashboard</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#accounts">Accounts</a></li>
+                    <li><a href="#ads">Advertisements</a></li>
+                    <li><a href="#orders">Orders</a></li>
+                    <li><a href="/" class="logout">Back to Site</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Admin Content -->
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-profile">
+                <div class="profile-image"></div>
+                <h3>Admin User</h3>
+                <p>Super Administrator</p>
+            </div>
+
+            <nav class="admin-menu">
+                <ul>
+                    <li><a href="#dashboard" class="active"><i>📊</i> Dashboard</a></li>
+                    <li><a href="#products"><i>📦</i> Products</a></li>
+                    <li><a href="#accounts"><i>👥</i> Accounts</a></li>
+                    <li><a href="#employees"><i>👔</i> Employees</a></li>
+                    <li><a href="#customers"><i>👤</i> Customers</a></li>
+                    <li><a href="#ads"><i>📢</i> Advertisements</a></li>
+                    <li><a href="#orders"><i>🛒</i> Orders</a></li>
+                    <li><a href="#settings"><i>⚙️</i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-content">
+            <!-- Dashboard Overview -->
+            <section id="dashboard" class="dashboard-section active">
+                <h2>Dashboard Overview</h2>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: #3498db;">
+                            <i>📦</i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Products</h3>
+                            <p id="total-products">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: #2ecc71;">
+                            <i>🛒</i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Today's Orders</h3>
+                            <p id="today-orders">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: #e74c3c;">
+                            <i>👤</i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Customers</h3>
+                            <p id="total-customers">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: #f39c12;">
+                            <i>📢</i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Active Ads</h3>
+                            <p id="active-ads">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list" id="recent-activity">
+                        <div class="activity-item">
+                            <div class="activity-icon">📦</div>
+                            <div class="activity-details">
+                                <p>New product "Premium Widget" added</p>
+                                <small>Just now</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">👤</div>
+                            <div class="activity-details">
+                                <p>User "john_doe" created an account</p>
+                                <small>10 minutes ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Products Management (Other sections would follow similar structure) -->
+            <section id="products" class="management-section">
+                <div class="section-header">
+                    <h2>Product Management</h2>
+                    <button class="btn btn-primary" id="add-product-btn">
+                        <i>➕</i> Add New Product
+                    </button>
+                </div>
+
+                <div class="management-table-container">
+                    <table class="management-table" id="products-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Code</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Type</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>101</td>
+                                <td>Premium Widget</td>
+                                <td>PW-1001</td>
+                                <td>$49.99</td>
+                                <td>25</td>
+                                <td>Widget</td>
+                                <td class="action-btns">
+                                    <button class="btn btn-sm btn-primary">Edit</button>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>102</td>
+                                <td>Basic Gadget</td>
+                                <td>BG-2002</td>
+                                <td>$19.99</td>
+                                <td>50</td>
+                                <td>Gadget</td>
+                                <td class="action-btns">
+                                    <button class="btn btn-sm btn-primary">Edit</button>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile menu toggle
+            document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
+                document.getElementById('main-nav').classList.toggle('active');
+            });
+
+            // Tab switching
+            document.querySelectorAll('.admin-menu a').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    // Update active tab
+                    document.querySelectorAll('.admin-menu a').forEach(el => el.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Show corresponding section
+                    const sectionId = this.getAttribute('href');
+                    document.querySelectorAll('.dashboard-section, .management-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    document.querySelector(sectionId).classList.add('active');
+                });
+            });
+
+            // Simulate loading stats
+            setTimeout(() => {
+                document.getElementById('total-products').textContent = '42';
+                document.getElementById('today-orders').textContent = '7';
+                document.getElementById('total-customers').textContent = '128';
+                document.getElementById('active-ads').textContent = '3';
+            }, 1000);
+
+            // Add product button
+            document.getElementById('add-product-btn').addEventListener('click', function () {
+                alert('Add product functionality would open a modal in a real implementation');
+            });
+
+            // Table row actions
+            document.querySelectorAll('.btn-primary').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    alert('Edit functionality would open a form');
+                });
+            });
+
+            document.querySelectorAll('.btn-danger').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    if (confirm('Are you sure you want to delete this item?')) {
+                        alert('Item would be deleted in a real implementation');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

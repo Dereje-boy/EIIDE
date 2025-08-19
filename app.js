@@ -30,6 +30,8 @@ const orderRoutes = require('./routes/order.route');
 const productRoutes = require('./routes/product.route');
 const salesRoutes = require('./routes/sales.route');
 const loginRoutes = require('./routes/login.route');
+const dashboardRoutes = require('./routes/dashboard.route');
+
 
 // Route Mapping (Plural endpoints)
 app.use('/api/accounts', require('./routes/account.route'));
@@ -42,8 +44,10 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/sales', salesRoutes);
 app.use('/login', loginRoutes)
+app.use('/dashboard', dashboardRoutes)
 
 app.get('/', (req, res) => {
+
     res.render('homepage/index.handlebars');
 });
 app.get('/signup', (req, res) => {

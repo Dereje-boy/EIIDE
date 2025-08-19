@@ -136,6 +136,11 @@
 
 <script src="../index.js"></script>
 <script>
+    // Mobile Menu Toggle
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
+        document.getElementById('main-nav').classList.toggle('active');
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
 
         // DOM elements

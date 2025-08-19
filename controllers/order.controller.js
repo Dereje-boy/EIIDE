@@ -162,8 +162,16 @@ exports.getAllOrders = async (req, res) => {
 // @route   GET /api/orders/acc_id
 exports.getCustomerOrders = async (req, res) => {
     try {
+        const token = req.cookies['token']
+        // console.log("token: " + token)
+        if (!token || !token.length) throw "Invalid token"
+        // console.log({ 'verifyToken': verifyToken(token) })
+        const username = verifyToken(token).payload
+        const user = await accountModel.getAccountByUsername(username)
+        // console.log(user)
+
         console.log('fetching this customer orders')
-        const acc_id = 12;
+        const acc_id = user.account_id;
         const orders = await orderModel.getOrdersByAccount(acc_id);
         console.log(orders)
 

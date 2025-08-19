@@ -11,12 +11,13 @@
 <body>
     <!-- Header with Navigation -->
     <header>
-        <div class="container header-container">
-            <div class="logo">EIIDE</div>
+        <div class="container header-container" id="home">
+            <div class="logo"><a href="/" style="color: aquamarine; text-decoration: none;">EIIDE</a></div>
             <button class="mobile-menu-btn">☰</button>
             <nav id="main-nav">
                 <ul>
                     <li><a href="/">Home</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
                     <li><a href="/orders">Your Orders</a></li>
                     <li><a href="/newproduct">New Products</a></li>
                     <li><a href="/login">Login</a></li>
@@ -44,10 +45,10 @@
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#products">Products</a></li>
-                        <li><a href="#categories">Categories</a></li>
-                        <li><a href="#new">New Arrivals</a></li>
+                        <li><a href="/#home">Home</a></li>
+                        <li><a href="/#available-products">Products</a></li>
+                        <li><a href="/orders">Orders</a></li>
+                        <li><a href="/login">Login</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -66,6 +67,16 @@
     </footer>
 
     <script src="index.js"></script>
+    <script>
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            mainNav.classList.toggle('active');
+        }
+        // Mobile menu
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+    </script>
 </body>
 
 </html>

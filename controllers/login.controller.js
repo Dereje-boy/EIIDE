@@ -1,5 +1,6 @@
 const accountModel = require('../models/accountModel');
 const { generateToken, verifyToken } = require('../utils/jwt');
+const { check } = require('../utils/account_type');
 
 
 // New login endpoint
@@ -36,22 +37,12 @@ exports.login = async (req, res) => {
 
 //just render login page
 exports.loginget = async (req, res) => {
-    //check cookie token exist
-    const token = req.cookies['token']
-
-    //if found, check validity
     try {
-        if (!token || !token.length) throw "Invalid token"
-        console.log(verifyToken(token))
-        const username = verifyToken(token).payload
-        const user = await accountModel.getAccountByUsername(username)
-        console.log(user)
-
-        //if valid redirect to homepage for customer and dashboard for admin
-        if (user.account_type.toLowerCase() == 'customer')
+        const type = await check(req);
+        if (type == 'customer')
             return res.redirect('/')
-        else if (user.account_type.toLowerCase() == 'admin' |
-            user.account_type.toLowerCase() == 'employee')
+        else if (type == 'admin' |
+            type == 'employee')
             return res.redirect('/dashboard')
 
     } catch (e) {

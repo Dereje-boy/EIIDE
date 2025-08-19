@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EIIDE - Admin Dashboard</title>
+    <link rel="stylesheet" href="/style/admin.css" />
+</head>
+
+<body>
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="container header-container">
+            <div class="logo">EIIDE ADMIN</div>
+            <button class="mobile-menu-btn">☰</button>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#dashboard" class="active">Dashboard</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#accounts">Accounts</a></li>
+                    <li><a href="#ads">Advertisements</a></li>
+                    <li><a href="#orders">Orders</a></li>
+                    <li><a href="#logout">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Admin Content -->
+    <div class="admin-container" id="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-profile">
+                <div class="profile-image">
+                    <img src="/images/eiide.webp" alt="EIIDE image" style="max-width: 100%; border-radius:50%">
+                </div>
+                <h3>Admin User</h3>
+                <p style="text-transform: uppercase;">{{{username}}}</p>
+            </div>
+
+            <nav class="admin-menu">
+                <ul>
+                    <li><a href="#dashboard" class="active"><i>📊</i> Dashboard</a></li>
+                    <li><a href="#products"><i>📦</i> Products</a></li>
+                    <li><a href="#accounts"><i>👥</i> Accounts</a></li>
+                    <li><a href="#ads"><i>📢</i> Advertisements</a></li>
+                    <li><a href="#orders"><i>🛒</i> Orders</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-content">
+            <!-- Dashboard Overview -->
+            <section id="dashboard" class="dashboard-section active">
+                <h2>Dashboard Overview</h2>
+                <div id="dashboard-message"></div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: #3498db;">📦</div>
+                        <div class="stat-info">
+                            <h3>Total Products</h3>
+                            <p id="total-products">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: #2ecc71;">🛒</div>
+                        <div class="stat-info">
+                            <h3>Total Orders</h3>
+                            <p id="total-orders">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: #e74c3c;">👤</div>
+                        <div class="stat-info">
+                            <h3>Total Accounts</h3>
+                            <p id="total-accounts">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: #f39c12;">📢</div>
+                        <div class="stat-info">
+                            <h3>Active Ads</h3>
+                            <p id="active-ads">0</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Products Management -->
+            <section id="products" class="management-section">
+                <div class="section-header">
+                    <h2>Product Management</h2>
+                    <a class="btn btn-primary" id="add-product-btn" href="/newproduct" style="text-decoration: none;">➕
+                        Add Product</a>
+                </div>
+                <div id="products-message"></div>
+                <div class="management-table-container">
+                    <table class="management-table" id="products-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Code</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Type</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="7" class="loading">Loading products...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Accounts Management -->
+            <section id="accounts" class="management-section">
+                <div class="section-header">
+                    <h2>Account Management</h2>
+                    <a class="btn btn-primary" href="/signup" style="text-decoration: none;">➕ Add Account</a>
+                </div>
+                <div id="accounts-message"></div>
+                <div class="management-table-container">
+                    <table class="management-table" id="accounts-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Type</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="5" class="loading">Loading accounts...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Ads Management -->
+            <section id="ads" class="management-section">
+                <div class="section-header">
+                    <h2>Advertisement Management</h2>
+                    <a href="/api/ads" class="btn btn-primary" id="add-ad-btn" style="text-decoration: none;">➕ Add
+                        Ad</a>
+                </div>
+                <div id="ads-message">
+                </div>
+                <div class="management-table-container">
+                    <table class="management-table" id="ads-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Image</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="4" class="loading">Loading ads...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Orders Management -->
+            <section id="orders" class="management-section">
+                <div class="section-header">
+                    <h2>Order Management</h2>
+                </div>
+                <div id="orders-message"></div>
+                <div class="management-table-container">
+                    <table class="management-table" id="orders-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Product</th>
+                                <th>Account ID</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="7" class="loading">Loading orders...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="product-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="product-modal-title">Add Product</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="product-form">
+                <input type="hidden" id="product-id">
+                <div class="form-group">
+                    <label for="pro_name">Product Name</label>
+                    <input type="text" id="pro_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="pro_code">Product Code</label>
+                    <input type="text" id="pro_code" required>
+                </div>
+                <div class="form-group">
+                    <label for="pro_type">Product Type</label>
+                    <input type="text" id="pro_type" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" id="price" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="stock_quantity">Stock Quantity</label>
+                    <input type="number" id="stock_quantity" required>
+                </div>
+                <div class="form-group">
+                    <label for="images">Images (comma separated URLs)</label>
+                    <textarea id="images"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Product</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Account Modal -->
+    <div class="modal" id="account-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="account-modal-title">Add Account</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="account-form">
+                <input type="hidden" id="account-id">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password">
+                </div>
+                <div class="form-group">
+                    <label for="account_type">Account Type</label>
+                    <select id="account_type" required>
+                        <option value="customer">Customer</option>
+                        <option value="employee">Employee</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ad Modal -->
+    <div class="modal" id="ad-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="ad-modal-title">Add Advertisement</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="ad-form">
+                <input type="hidden" id="ad-id">
+                <div class="form-group">
+                    <label for="ad-image">Image URL</label>
+                    <input type="url" id="ad-image" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Ad</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/script/admin.js"></script>
+</body>
+
+</html>
