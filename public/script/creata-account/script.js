@@ -90,8 +90,8 @@ document.addEventListener('DOMContentLoaded', function () {
             return false;
         }
 
-        if (password.length < 6) {
-            showError(errorElement, 'Password must be at least 6 characters');
+        if (password.length < 8) {
+            showError(errorElement, 'Password must be at least 8 characters');
             return false;
         }
 
